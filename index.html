@@ -67,12 +67,265 @@ button:active{transform:translateY(1px)}
  .app{padding:5px 6px 12px}.top{height:40px}
  .controls{grid-template-columns:1fr 1fr}.fire{grid-column:1/-1}
 }
+
+/* V18 visual shell */
+html{background:#090813}
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 16% 12%,rgba(255,93,169,.17),transparent 28%),
+    radial-gradient(circle at 86% 18%,rgba(96,119,255,.17),transparent 31%),
+    radial-gradient(circle at 52% 88%,rgba(74,220,255,.10),transparent 33%),
+    linear-gradient(145deg,#0d0b18,#171329 45%,#0c0b16);
+  overflow-x:hidden;
+}
+body::before,body::after{
+  content:"";position:fixed;pointer-events:none;z-index:0;border-radius:50%;filter:blur(80px);
+  opacity:.34;animation:floatGlow 9s ease-in-out infinite alternate;
+}
+body::before{width:340px;height:340px;background:#ff4fa0;left:-130px;top:10vh}
+body::after{width:410px;height:410px;background:#5d63ff;right:-180px;bottom:4vh;animation-delay:-3s}
+@keyframes floatGlow{to{transform:translate3d(45px,-28px,0) scale(1.14)}}
+.app{
+  position:relative;z-index:1;width:min(680px,calc(100% - 18px));margin:18px auto;
+  padding:14px 14px 18px;border:1px solid rgba(255,255,255,.10);border-radius:26px;
+  background:linear-gradient(180deg,rgba(37,32,58,.86),rgba(17,15,30,.90));
+  box-shadow:0 28px 90px rgba(0,0,0,.46),inset 0 1px 0 rgba(255,255,255,.05);
+  backdrop-filter:blur(18px)
+}
+.brandRow{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 2px 10px}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.logoMark{
+  width:38px;height:38px;border-radius:13px;position:relative;flex:0 0 auto;
+  background:linear-gradient(135deg,#ff71b8,#8d62ff);
+  box-shadow:0 9px 28px rgba(255,74,163,.25),inset 0 1px rgba(255,255,255,.35)
+}
+.logoMark::before,.logoMark::after{content:"";position:absolute;border-radius:50%;background:#fff}
+.logoMark::before{width:9px;height:9px;left:14px;top:14px}
+.logoMark::after{width:4px;height:4px;left:26px;top:7px;box-shadow:-18px 22px 0 #fff}
+.brandText strong{display:block;font-size:14px;letter-spacing:.08em}
+.brandText span{display:block;color:#8f8aa1;font-size:9px;margin-top:2px;letter-spacing:.09em;text-transform:uppercase}
+.profileMini{display:flex;align-items:center;gap:8px}
+.avatar{
+  width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:1000;
+  background:linear-gradient(135deg,#ff5da9,#7c5cff);box-shadow:0 0 0 3px rgba(255,255,255,.05)
+}
+.profileCopy{text-align:right;line-height:1.1}
+.profileCopy strong{display:block;font-size:10px;max-width:120px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.profileCopy span{font-size:8px;color:#918da2}
+.iconBtn{min-height:30px;width:30px;padding:0;border-radius:10px;background:rgba(255,255,255,.055);color:#bcb7cb}
+.top{
+  height:auto;min-height:54px;padding:10px 12px;border-radius:17px;
+  background:linear-gradient(110deg,rgba(255,255,255,.055),rgba(255,255,255,.022));
+  border:1px solid rgba(255,255,255,.07)
+}
+.level{font-size:13px;letter-spacing:.08em}
+.level strong{font-size:18px;color:#fff}
+.hearts{filter:drop-shadow(0 0 8px rgba(255,77,131,.25))}
+.levelTrack{height:4px;border-radius:99px;background:rgba(255,255,255,.07);overflow:hidden;margin-top:7px;width:128px}
+.levelTrack > i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ff5da9,#9973ff);border-radius:inherit;transition:width .45s cubic-bezier(.2,.8,.2,1)}
+.stage{
+  margin-top:10px;border-radius:22px;border:1px solid rgba(255,255,255,.08);
+  background:radial-gradient(circle at 50% 34%,rgba(255,93,169,.08),transparent 35%),#141222;
+  box-shadow:inset 0 0 50px rgba(0,0,0,.30),0 14px 45px rgba(0,0,0,.23);
+  transition:transform .15s ease,box-shadow .2s ease
+}
+.stage::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  box-shadow:inset 0 1px rgba(255,255,255,.06)
+}
+.stage.hitShake{animation:hitShake .18s linear}
+@keyframes hitShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}55%{transform:translateX(4px)}75%{transform:translateX(-2px)}}
+.controls{gap:8px;margin-top:10px}
+button{
+  border-radius:12px;transition:transform .14s ease,filter .14s ease,box-shadow .14s ease,background .14s ease;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04)
+}
+button:hover:not(:disabled){transform:translateY(-1px);filter:brightness(1.08)}
+button:active:not(:disabled){transform:translateY(1px) scale(.985)}
+.fire{
+  position:relative;overflow:hidden;
+  background:linear-gradient(135deg,#ff68b0,#ff438f 55%,#b54dff);border-color:rgba(255,255,255,.13);
+  box-shadow:0 10px 28px rgba(255,65,145,.22),inset 0 1px rgba(255,255,255,.30)
+}
+.fire::after{
+  content:"";position:absolute;inset:-60% auto -60% -35%;width:30%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.38),transparent);
+  transform:rotate(18deg);animation:fireShine 3.2s ease-in-out infinite
+}
+@keyframes fireShine{0%,60%{left:-45%}100%{left:125%}}
+.status{font-size:10px;color:#aaa4bb;margin-top:9px}
+.meta{
+  margin-top:9px;padding:9px 10px;border-radius:13px;background:rgba(255,255,255,.025);
+  border:1px solid rgba(255,255,255,.05)
+}
+.toast{top:18px;border-radius:999px;padding:7px 12px;box-shadow:0 9px 24px rgba(0,0,0,.28)}
+.quizBack{backdrop-filter:blur(13px);background:rgba(8,7,16,.83)}
+.quiz{
+  border-radius:22px;padding:20px;background:linear-gradient(180deg,#302b48,#201d31);
+  box-shadow:0 28px 70px rgba(0,0,0,.45);animation:quizIn .25s cubic-bezier(.2,.9,.25,1)
+}
+@keyframes quizIn{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+.answer{border-radius:12px}
+.levelSplash{
+  position:absolute;z-index:7;left:50%;top:45%;transform:translate(-50%,-50%) scale(.9);
+  pointer-events:none;text-align:center;opacity:0;
+}
+.levelSplash.show{animation:levelSplash 1s ease both}
+.levelSplash b{display:block;font-size:32px;letter-spacing:.1em;text-shadow:0 0 28px rgba(255,93,169,.6)}
+.levelSplash span{display:block;margin-top:4px;font-size:10px;color:#ff8fc2;letter-spacing:.26em;font-weight:900}
+@keyframes levelSplash{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.75)}
+  18%,68%{opacity:1;transform:translate(-50%,-50%) scale(1)}
+  100%{opacity:0;transform:translate(-50%,-65%) scale(1.08)}
+}
+
+/* Auth */
+.authOverlay{
+  position:fixed;z-index:50;inset:0;display:none;align-items:center;justify-content:center;padding:20px;
+  background:
+    radial-gradient(circle at 25% 20%,rgba(255,93,169,.20),transparent 32%),
+    radial-gradient(circle at 80% 75%,rgba(103,91,255,.22),transparent 34%),
+    rgba(8,7,16,.94);backdrop-filter:blur(20px)
+}
+.authOverlay.open{display:flex}
+.authCard{
+  width:min(430px,100%);border-radius:28px;padding:25px;
+  background:linear-gradient(160deg,rgba(47,40,70,.96),rgba(22,19,35,.97));
+  border:1px solid rgba(255,255,255,.11);box-shadow:0 38px 100px rgba(0,0,0,.58);
+  animation:authIn .35s cubic-bezier(.2,.9,.2,1)
+}
+@keyframes authIn{from{opacity:0;transform:translateY(22px) scale(.96)}to{opacity:1;transform:none}}
+.authHero{text-align:center;margin-bottom:18px}
+.authLogo{width:56px;height:56px;border-radius:19px;margin:0 auto 10px;background:linear-gradient(135deg,#ff5da9,#765cff);display:grid;place-items:center;font-weight:1000;font-size:18px;box-shadow:0 14px 40px rgba(255,93,169,.25)}
+.authHero h1{font-size:21px;margin:0}
+.authHero p{font-size:10px;color:#aaa4bb;line-height:1.5;margin:7px auto 0;max-width:315px}
+.authTabs{display:grid;grid-template-columns:1fr 1fr;gap:5px;background:#171522;padding:4px;border-radius:13px;margin-bottom:14px}
+.authTab{border:0;min-height:34px;background:transparent;color:#817c91;border-radius:10px;font-size:10px}
+.authTab.active{background:#2f2a43;color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.authForm{display:grid;gap:9px}
+.field label{display:block;font-size:8px;font-weight:900;color:#928ca1;margin:0 0 5px 3px;letter-spacing:.08em;text-transform:uppercase}
+.field input{
+  width:100%;height:44px;border-radius:12px;border:1px solid rgba(255,255,255,.09);
+  outline:none;background:#171521;color:#fff;padding:0 13px;font:inherit;font-size:12px;
+  transition:border .15s,box-shadow .15s
+}
+.field input:focus{border-color:#ff65ae;box-shadow:0 0 0 3px rgba(255,93,169,.10)}
+.authSubmit{margin-top:3px;background:linear-gradient(135deg,#ff5da9,#875eff);border:0;color:#fff;min-height:46px}
+.authError{min-height:16px;text-align:center;color:#ff8da9;font-size:9px}
+.authFoot{text-align:center;color:#777286;font-size:8px;margin-top:11px;line-height:1.45}
+.hidden{display:none!important}
+@media(max-width:520px){
+ .app{width:calc(100% - 8px);margin:4px auto;padding:9px;border-radius:18px}
+ .brandRow{margin-bottom:6px}.profileCopy{display:none}.stage{border-radius:16px}
+ .controls{grid-template-columns:1fr 1fr}.fire{grid-column:1/-1}
+}
+
+
+/* V19: 74-theme system */
+:root{
+ --t-bg1:#0d0b18;--t-bg2:#171329;--t-panel:#25203a;--t-panel2:#171521;
+ --t-accent:#ff5da9;--t-accent2:#8d62ff;--t-text:#f8f5fb;--t-muted:#aaa7b8;
+ --t-core:#242636;--t-pin:#ff5da9;--t-pin2:#ff8fc2;--t-glow:#ff5da9;
+}
+body{color:var(--t-text)!important;background:
+ radial-gradient(circle at 16% 12%,color-mix(in srgb,var(--t-accent) 22%,transparent),transparent 28%),
+ radial-gradient(circle at 86% 18%,color-mix(in srgb,var(--t-accent2) 22%,transparent),transparent 31%),
+ radial-gradient(circle at 52% 88%,color-mix(in srgb,var(--t-pin2) 12%,transparent),transparent 33%),
+ linear-gradient(145deg,var(--t-bg1),var(--t-bg2) 48%,var(--t-bg1))!important;
+ transition:background .38s ease,color .25s ease}
+body::before{background:var(--t-accent)!important} body::after{background:var(--t-accent2)!important}
+.app{background:linear-gradient(180deg,color-mix(in srgb,var(--t-panel) 91%,transparent),color-mix(in srgb,var(--t-bg1) 94%,transparent))!important}
+.logoMark,.avatar,.authLogo{background:linear-gradient(135deg,var(--t-accent),var(--t-accent2))!important}
+.levelTrack>i,.authSubmit{background:linear-gradient(90deg,var(--t-accent),var(--t-accent2))!important}
+.fire{background:linear-gradient(135deg,var(--t-pin2),var(--t-accent) 55%,var(--t-accent2))!important;box-shadow:0 10px 28px color-mix(in srgb,var(--t-accent) 28%,transparent)!important}
+.stage{background:radial-gradient(circle at 50% 34%,color-mix(in srgb,var(--t-accent) 10%,transparent),transparent 35%),color-mix(in srgb,var(--t-bg2) 75%,#080810)!important}
+.status,.meta,.brandText span,.profileCopy span,.authHero p,.authFoot{color:var(--t-muted)!important}
+.quiz{background:linear-gradient(180deg,var(--t-panel2),var(--t-panel))!important}
+.quiz .tag,.levelSplash span{color:var(--t-pin2)!important}
+.levelSplash b{text-shadow:0 0 28px color-mix(in srgb,var(--t-accent) 65%,transparent)!important}
+.field input{background:color-mix(in srgb,var(--t-bg1) 86%,#000)!important;color:var(--t-text)!important}
+.field input:focus{border-color:var(--t-accent)!important;box-shadow:0 0 0 3px color-mix(in srgb,var(--t-accent) 15%,transparent)!important}
+.themeBtn{min-height:30px;padding:0 9px;border-radius:10px;background:color-mix(in srgb,var(--t-accent) 12%,transparent);color:var(--t-text);font-size:9px;white-space:nowrap}
+.themeOverlay{position:fixed;z-index:60;inset:0;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(5,5,12,.86);backdrop-filter:blur(18px)}
+.themeOverlay.open{display:flex}
+.themePanel{width:min(760px,100%);max-height:min(760px,90vh);display:flex;flex-direction:column;border-radius:24px;border:1px solid rgba(255,255,255,.12);background:linear-gradient(180deg,var(--t-panel2),var(--t-bg1));box-shadow:0 35px 100px rgba(0,0,0,.6);overflow:hidden;animation:authIn .25s ease}
+.themeHead{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px 16px 10px}.themeHead h2{font-size:17px;margin:0}.themeHead p{font-size:9px;margin:3px 0 0;color:var(--t-muted)}
+.themeClose{min-height:32px;width:34px;padding:0}.themeSearch{margin:0 16px 12px;height:40px;border-radius:12px;border:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.18);color:var(--t-text);padding:0 12px;outline:none}
+.themeGrid{padding:0 16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;overflow:auto}
+.themeCard{min-height:67px;padding:8px;border-radius:13px;text-align:left;display:grid;grid-template-columns:33px 1fr;gap:8px;align-items:center;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08)}
+.themeCard.active{border-color:var(--t-accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--t-accent) 20%,transparent)}
+.themeSwatch{width:33px;height:33px;border-radius:10px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.15)}
+.themeCard b{display:block;font-size:9px;color:var(--t-text)}.themeCard small{display:block;margin-top:3px;font-size:7px;color:var(--t-muted)}
+.themeCount{font-size:8px;color:var(--t-muted);margin-left:auto}
+@media(max-width:650px){.themeGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.themeBtn span{display:none}}
+
 </style>
 </head>
 <body>
+
+<div id="authOverlay" class="authOverlay open">
+  <div class="authCard">
+    <div class="authHero">
+      <div class="authLogo">C500</div>
+      <h1>Coreball Science</h1>
+      <p>Build your streak, clear 500 levels, and win back lost hearts with science.</p>
+    </div>
+    <div class="authTabs">
+      <button id="loginTab" class="authTab active" type="button">LOGIN</button>
+      <button id="signupTab" class="authTab" type="button">SIGN UP</button>
+    </div>
+
+    <form id="loginForm" class="authForm">
+      <div class="field"><label>Email</label><input id="loginEmail" type="email" autocomplete="email" required placeholder="player@example.com"></div>
+      <div class="field"><label>Password</label><input id="loginPassword" type="password" autocomplete="current-password" required placeholder="••••••••"></div>
+      <button class="authSubmit" type="submit">ENTER GAME</button>
+    </form>
+
+    <form id="signupForm" class="authForm hidden">
+      <div class="field"><label>Player name</label><input id="signupName" maxlength="20" required placeholder="Player One"></div>
+      <div class="field"><label>Email</label><input id="signupEmail" type="email" autocomplete="email" required placeholder="player@example.com"></div>
+      <div class="field"><label>Password</label><input id="signupPassword" type="password" minlength="6" autocomplete="new-password" required placeholder="6+ characters"></div>
+      <button class="authSubmit" type="submit">CREATE PLAYER</button>
+    </form>
+
+    <div id="authError" class="authError"></div>
+    <div class="authFoot">Profiles and passwords are stored only in this browser for this static build. For public production authentication, connect a real auth service/backend.</div>
+  </div>
+</div>
+
+
+<div id="themeOverlay" class="themeOverlay" role="dialog" aria-modal="true" aria-label="Choose a theme">
+  <div class="themePanel">
+    <div class="themeHead">
+      <div><h2>Choose your theme</h2><p>74 visual styles · saved to your player profile</p></div>
+      <span id="themeCount" class="themeCount">74 THEMES</span>
+      <button id="themeClose" class="themeClose" type="button">✕</button>
+    </div>
+    <input id="themeSearch" class="themeSearch" placeholder="Search themes…" autocomplete="off">
+    <div id="themeGrid" class="themeGrid"></div>
+  </div>
+</div>
+
 <div class="app">
+  <div class="brandRow">
+    <div class="brand">
+      <div class="logoMark"></div>
+      <div class="brandText"><strong>COREBALL 500</strong><span>Science Challenge</span></div>
+    </div>
+    <div class="profileMini">
+      <div class="profileCopy"><strong id="playerName">PLAYER</strong><span>Best <b id="bestLevel">1</b> · Science <b id="scienceScore">0</b></span></div>
+      <div id="profileAvatar" class="avatar">P</div>
+      <button id="themeBtn" class="themeBtn" type="button" title="Choose theme">🎨 <span>THEMES</span></button>
+      <button id="logoutBtn" class="iconBtn" type="button" title="Log out">↪</button>
+    </div>
+  </div>
+
   <div class="top">
-    <div class="level">LEVEL <span id="level">1</span></div>
+    <div>
+      <div class="level">LEVEL <strong id="level">1</strong> / 500</div>
+      <div class="levelTrack"><i id="levelProgressFill"></i></div>
+    </div>
     <div class="hearts" id="hearts">♥ ♥ ♥</div>
   </div>
 
@@ -80,6 +333,7 @@ button:active{transform:translateY(1px)}
     <canvas id="game" width="600" height="625"></canvas>
     <div id="toast" class="toast"></div>
 
+    <div id="levelSplash" class="levelSplash"><b>LEVEL UP</b><span>KEEP GOING</span></div>
     <div id="quizBack" class="quizBack" role="dialog" aria-modal="true">
       <div class="quiz">
         <div class="tag">SCIENCE SAVE · +1 HEART</div>
@@ -137,6 +391,155 @@ const G={
  collisions:0
 };
 
+const AUTH_ACCOUNTS='coreball500_accounts_v2';
+const AUTH_SESSION='coreball500_session_v2';
+let CURRENT_USER=null;
+const FX=[];
+const THEMES=[{"id":"classic-pink","name":"Classic Pink","bg1":"hsl(330 38% 6%)","bg2":"hsl(354 42% 13%)","panel":"hsl(338 29% 14%)","panel2":"hsl(344 27% 20%)","accent":"hsl(330 62% 58%)","accent2":"hsl(14 68% 62%)","text":"hsl(330 15% 96%)","muted":"hsl(330 13% 67%)","core":"hsl(342 24% 20%)","pin":"hsl(330 74% 62%)","pin2":"hsl(5 70% 68%)","glow":"hsl(330 80% 64%)"},{"id":"neon-purple","name":"Neon Purple","bg1":"hsl(285 38% 8%)","bg2":"hsl(309 42% 15%)","panel":"hsl(293 29% 14%)","panel2":"hsl(299 27% 20%)","accent":"hsl(285 69% 58%)","accent2":"hsl(329 75% 62%)","text":"hsl(285 15% 96%)","muted":"hsl(285 13% 67%)","core":"hsl(297 24% 20%)","pin":"hsl(285 81% 62%)","pin2":"hsl(320 77% 68%)","glow":"hsl(285 87% 64%)"},{"id":"electric-blue","name":"Electric Blue","bg1":"hsl(220 38% 10%)","bg2":"hsl(244 42% 17%)","panel":"hsl(228 29% 14%)","panel2":"hsl(234 27% 20%)","accent":"hsl(220 76% 58%)","accent2":"hsl(264 82% 62%)","text":"hsl(220 15% 96%)","muted":"hsl(220 13% 67%)","core":"hsl(232 24% 20%)","pin":"hsl(220 88% 62%)","pin2":"hsl(255 84% 68%)","glow":"hsl(220 94% 64%)"},{"id":"cyber-aqua","name":"Cyber Aqua","bg1":"hsl(188 38% 6%)","bg2":"hsl(212 42% 13%)","panel":"hsl(196 29% 14%)","panel2":"hsl(202 27% 20%)","accent":"hsl(188 83% 58%)","accent2":"hsl(232 89% 62%)","text":"hsl(188 15% 96%)","muted":"hsl(188 13% 67%)","core":"hsl(200 24% 20%)","pin":"hsl(188 95% 62%)","pin2":"hsl(223 91% 68%)","glow":"hsl(188 100% 64%)"},{"id":"emerald-pulse","name":"Emerald Pulse","bg1":"hsl(145 38% 8%)","bg2":"hsl(169 42% 15%)","panel":"hsl(153 29% 14%)","panel2":"hsl(159 27% 20%)","accent":"hsl(145 62% 58%)","accent2":"hsl(189 68% 62%)","text":"hsl(145 15% 96%)","muted":"hsl(145 13% 67%)","core":"hsl(157 24% 20%)","pin":"hsl(145 74% 62%)","pin2":"hsl(180 70% 68%)","glow":"hsl(145 80% 64%)"},{"id":"lime-circuit","name":"Lime Circuit","bg1":"hsl(105 38% 10%)","bg2":"hsl(129 42% 17%)","panel":"hsl(113 29% 14%)","panel2":"hsl(119 27% 20%)","accent":"hsl(105 69% 58%)","accent2":"hsl(149 75% 62%)","text":"hsl(105 15% 96%)","muted":"hsl(105 13% 67%)","core":"hsl(117 24% 20%)","pin":"hsl(105 81% 62%)","pin2":"hsl(140 77% 68%)","glow":"hsl(105 87% 64%)"},{"id":"solar-gold","name":"Solar Gold","bg1":"hsl(47 38% 6%)","bg2":"hsl(71 42% 13%)","panel":"hsl(55 29% 14%)","panel2":"hsl(61 27% 20%)","accent":"hsl(47 76% 58%)","accent2":"hsl(91 82% 62%)","text":"hsl(47 15% 96%)","muted":"hsl(47 13% 67%)","core":"hsl(59 24% 20%)","pin":"hsl(47 88% 62%)","pin2":"hsl(82 84% 68%)","glow":"hsl(47 94% 64%)"},{"id":"amber-arcade","name":"Amber Arcade","bg1":"hsl(32 38% 8%)","bg2":"hsl(56 42% 15%)","panel":"hsl(40 29% 14%)","panel2":"hsl(46 27% 20%)","accent":"hsl(32 83% 58%)","accent2":"hsl(76 89% 62%)","text":"hsl(32 15% 96%)","muted":"hsl(32 13% 67%)","core":"hsl(44 24% 20%)","pin":"hsl(32 95% 62%)","pin2":"hsl(67 91% 68%)","glow":"hsl(32 100% 64%)"},{"id":"magma-red","name":"Magma Red","bg1":"hsl(8 38% 10%)","bg2":"hsl(32 42% 17%)","panel":"hsl(16 29% 14%)","panel2":"hsl(22 27% 20%)","accent":"hsl(8 62% 58%)","accent2":"hsl(52 68% 62%)","text":"hsl(8 15% 96%)","muted":"hsl(8 13% 67%)","core":"hsl(20 24% 20%)","pin":"hsl(8 74% 62%)","pin2":"hsl(43 70% 68%)","glow":"hsl(8 80% 64%)"},{"id":"crimson-night","name":"Crimson Night","bg1":"hsl(350 38% 6%)","bg2":"hsl(14 42% 13%)","panel":"hsl(358 29% 14%)","panel2":"hsl(4 27% 20%)","accent":"hsl(350 69% 58%)","accent2":"hsl(34 75% 62%)","text":"hsl(350 15% 96%)","muted":"hsl(350 13% 67%)","core":"hsl(2 24% 20%)","pin":"hsl(350 81% 62%)","pin2":"hsl(25 77% 68%)","glow":"hsl(350 87% 64%)"},{"id":"rose-quartz","name":"Rose Quartz","bg1":"hsl(338 38% 8%)","bg2":"hsl(2 42% 15%)","panel":"hsl(346 29% 14%)","panel2":"hsl(352 27% 20%)","accent":"hsl(338 76% 58%)","accent2":"hsl(22 82% 62%)","text":"hsl(338 15% 96%)","muted":"hsl(338 13% 67%)","core":"hsl(350 24% 20%)","pin":"hsl(338 88% 62%)","pin2":"hsl(13 84% 68%)","glow":"hsl(338 94% 64%)"},{"id":"cotton-candy","name":"Cotton Candy","bg1":"hsl(320 38% 10%)","bg2":"hsl(344 42% 17%)","panel":"hsl(328 29% 14%)","panel2":"hsl(334 27% 20%)","accent":"hsl(320 83% 58%)","accent2":"hsl(4 89% 62%)","text":"hsl(320 15% 96%)","muted":"hsl(320 13% 67%)","core":"hsl(332 24% 20%)","pin":"hsl(320 95% 62%)","pin2":"hsl(355 91% 68%)","glow":"hsl(320 100% 64%)"},{"id":"bubblegum","name":"Bubblegum","bg1":"hsl(332 38% 6%)","bg2":"hsl(356 42% 13%)","panel":"hsl(340 29% 14%)","panel2":"hsl(346 27% 20%)","accent":"hsl(332 62% 58%)","accent2":"hsl(16 68% 62%)","text":"hsl(332 15% 96%)","muted":"hsl(332 13% 67%)","core":"hsl(344 24% 20%)","pin":"hsl(332 74% 62%)","pin2":"hsl(7 70% 68%)","glow":"hsl(332 80% 64%)"},{"id":"violet-storm","name":"Violet Storm","bg1":"hsl(274 38% 8%)","bg2":"hsl(298 42% 15%)","panel":"hsl(282 29% 14%)","panel2":"hsl(288 27% 20%)","accent":"hsl(274 69% 58%)","accent2":"hsl(318 75% 62%)","text":"hsl(274 15% 96%)","muted":"hsl(274 13% 67%)","core":"hsl(286 24% 20%)","pin":"hsl(274 81% 62%)","pin2":"hsl(309 77% 68%)","glow":"hsl(274 87% 64%)"},{"id":"indigo-drive","name":"Indigo Drive","bg1":"hsl(252 38% 10%)","bg2":"hsl(276 42% 17%)","panel":"hsl(260 29% 14%)","panel2":"hsl(266 27% 20%)","accent":"hsl(252 76% 58%)","accent2":"hsl(296 82% 62%)","text":"hsl(252 15% 96%)","muted":"hsl(252 13% 67%)","core":"hsl(264 24% 20%)","pin":"hsl(252 88% 62%)","pin2":"hsl(287 84% 68%)","glow":"hsl(252 94% 64%)"},{"id":"cobalt-rush","name":"Cobalt Rush","bg1":"hsl(225 38% 6%)","bg2":"hsl(249 42% 13%)","panel":"hsl(233 29% 14%)","panel2":"hsl(239 27% 20%)","accent":"hsl(225 83% 58%)","accent2":"hsl(269 89% 62%)","text":"hsl(225 15% 96%)","muted":"hsl(225 13% 67%)","core":"hsl(237 24% 20%)","pin":"hsl(225 95% 62%)","pin2":"hsl(260 91% 68%)","glow":"hsl(225 100% 64%)"},{"id":"ocean-depths","name":"Ocean Depths","bg1":"hsl(205 38% 8%)","bg2":"hsl(229 42% 15%)","panel":"hsl(213 29% 14%)","panel2":"hsl(219 27% 20%)","accent":"hsl(205 62% 58%)","accent2":"hsl(249 68% 62%)","text":"hsl(205 15% 96%)","muted":"hsl(205 13% 67%)","core":"hsl(217 24% 20%)","pin":"hsl(205 74% 62%)","pin2":"hsl(240 70% 68%)","glow":"hsl(205 80% 64%)"},{"id":"arctic-ice","name":"Arctic Ice","bg1":"hsl(195 38% 10%)","bg2":"hsl(219 42% 17%)","panel":"hsl(203 29% 14%)","panel2":"hsl(209 27% 20%)","accent":"hsl(195 69% 58%)","accent2":"hsl(239 75% 62%)","text":"hsl(195 15% 96%)","muted":"hsl(195 13% 67%)","core":"hsl(207 24% 20%)","pin":"hsl(195 81% 62%)","pin2":"hsl(230 77% 68%)","glow":"hsl(195 87% 64%)"},{"id":"mint-byte","name":"Mint Byte","bg1":"hsl(158 38% 6%)","bg2":"hsl(182 42% 13%)","panel":"hsl(166 29% 14%)","panel2":"hsl(172 27% 20%)","accent":"hsl(158 76% 58%)","accent2":"hsl(202 82% 62%)","text":"hsl(158 15% 96%)","muted":"hsl(158 13% 67%)","core":"hsl(170 24% 20%)","pin":"hsl(158 88% 62%)","pin2":"hsl(193 84% 68%)","glow":"hsl(158 94% 64%)"},{"id":"forest-matrix","name":"Forest Matrix","bg1":"hsl(132 38% 8%)","bg2":"hsl(156 42% 15%)","panel":"hsl(140 29% 14%)","panel2":"hsl(146 27% 20%)","accent":"hsl(132 83% 58%)","accent2":"hsl(176 89% 62%)","text":"hsl(132 15% 96%)","muted":"hsl(132 13% 67%)","core":"hsl(144 24% 20%)","pin":"hsl(132 95% 62%)","pin2":"hsl(167 91% 68%)","glow":"hsl(132 100% 64%)"},{"id":"jade-temple","name":"Jade Temple","bg1":"hsl(150 38% 10%)","bg2":"hsl(174 42% 17%)","panel":"hsl(158 29% 14%)","panel2":"hsl(164 27% 20%)","accent":"hsl(150 62% 58%)","accent2":"hsl(194 68% 62%)","text":"hsl(150 15% 96%)","muted":"hsl(150 13% 67%)","core":"hsl(162 24% 20%)","pin":"hsl(150 74% 62%)","pin2":"hsl(185 70% 68%)","glow":"hsl(150 80% 64%)"},{"id":"toxic-slime","name":"Toxic Slime","bg1":"hsl(92 38% 6%)","bg2":"hsl(116 42% 13%)","panel":"hsl(100 29% 14%)","panel2":"hsl(106 27% 20%)","accent":"hsl(92 69% 58%)","accent2":"hsl(136 75% 62%)","text":"hsl(92 15% 96%)","muted":"hsl(92 13% 67%)","core":"hsl(104 24% 20%)","pin":"hsl(92 81% 62%)","pin2":"hsl(127 77% 68%)","glow":"hsl(92 87% 64%)"},{"id":"lemon-drop","name":"Lemon Drop","bg1":"hsl(58 38% 8%)","bg2":"hsl(82 42% 15%)","panel":"hsl(66 29% 14%)","panel2":"hsl(72 27% 20%)","accent":"hsl(58 76% 58%)","accent2":"hsl(102 82% 62%)","text":"hsl(58 15% 96%)","muted":"hsl(58 13% 67%)","core":"hsl(70 24% 20%)","pin":"hsl(58 88% 62%)","pin2":"hsl(93 84% 68%)","glow":"hsl(58 94% 64%)"},{"id":"sunset-drive","name":"Sunset Drive","bg1":"hsl(18 38% 10%)","bg2":"hsl(42 42% 17%)","panel":"hsl(26 29% 14%)","panel2":"hsl(32 27% 20%)","accent":"hsl(18 83% 58%)","accent2":"hsl(62 89% 62%)","text":"hsl(18 15% 96%)","muted":"hsl(18 13% 67%)","core":"hsl(30 24% 20%)","pin":"hsl(18 95% 62%)","pin2":"hsl(53 91% 68%)","glow":"hsl(18 100% 64%)"},{"id":"orange-crush","name":"Orange Crush","bg1":"hsl(26 38% 6%)","bg2":"hsl(50 42% 13%)","panel":"hsl(34 29% 14%)","panel2":"hsl(40 27% 20%)","accent":"hsl(26 62% 58%)","accent2":"hsl(70 68% 62%)","text":"hsl(26 15% 96%)","muted":"hsl(26 13% 67%)","core":"hsl(38 24% 20%)","pin":"hsl(26 74% 62%)","pin2":"hsl(61 70% 68%)","glow":"hsl(26 80% 64%)"},{"id":"copper-core","name":"Copper Core","bg1":"hsl(25 38% 8%)","bg2":"hsl(49 42% 15%)","panel":"hsl(33 29% 14%)","panel2":"hsl(39 27% 20%)","accent":"hsl(25 69% 58%)","accent2":"hsl(69 75% 62%)","text":"hsl(25 15% 96%)","muted":"hsl(25 13% 67%)","core":"hsl(37 24% 20%)","pin":"hsl(25 81% 62%)","pin2":"hsl(60 77% 68%)","glow":"hsl(25 87% 64%)"},{"id":"cherry-bomb","name":"Cherry Bomb","bg1":"hsl(348 38% 10%)","bg2":"hsl(12 42% 17%)","panel":"hsl(356 29% 14%)","panel2":"hsl(2 27% 20%)","accent":"hsl(348 76% 58%)","accent2":"hsl(32 82% 62%)","text":"hsl(348 15% 96%)","muted":"hsl(348 13% 67%)","core":"hsl(0 24% 20%)","pin":"hsl(348 88% 62%)","pin2":"hsl(23 84% 68%)","glow":"hsl(348 94% 64%)"},{"id":"ruby-glass","name":"Ruby Glass","bg1":"hsl(355 38% 6%)","bg2":"hsl(19 42% 13%)","panel":"hsl(3 29% 14%)","panel2":"hsl(9 27% 20%)","accent":"hsl(355 83% 58%)","accent2":"hsl(39 89% 62%)","text":"hsl(355 15% 96%)","muted":"hsl(355 13% 67%)","core":"hsl(7 24% 20%)","pin":"hsl(355 95% 62%)","pin2":"hsl(30 91% 68%)","glow":"hsl(355 100% 64%)"},{"id":"wine-velvet","name":"Wine Velvet","bg1":"hsl(345 38% 8%)","bg2":"hsl(9 42% 15%)","panel":"hsl(353 29% 14%)","panel2":"hsl(359 27% 20%)","accent":"hsl(345 62% 58%)","accent2":"hsl(29 68% 62%)","text":"hsl(345 15% 96%)","muted":"hsl(345 13% 67%)","core":"hsl(357 24% 20%)","pin":"hsl(345 74% 62%)","pin2":"hsl(20 70% 68%)","glow":"hsl(345 80% 64%)"},{"id":"plum-smoke","name":"Plum Smoke","bg1":"hsl(305 38% 10%)","bg2":"hsl(329 42% 17%)","panel":"hsl(313 29% 14%)","panel2":"hsl(319 27% 20%)","accent":"hsl(305 69% 58%)","accent2":"hsl(349 75% 62%)","text":"hsl(305 15% 96%)","muted":"hsl(305 13% 67%)","core":"hsl(317 24% 20%)","pin":"hsl(305 81% 62%)","pin2":"hsl(340 77% 68%)","glow":"hsl(305 87% 64%)"},{"id":"lavender-dream","name":"Lavender Dream","bg1":"hsl(278 38% 6%)","bg2":"hsl(302 42% 13%)","panel":"hsl(286 29% 14%)","panel2":"hsl(292 27% 20%)","accent":"hsl(278 76% 58%)","accent2":"hsl(322 82% 62%)","text":"hsl(278 15% 96%)","muted":"hsl(278 13% 67%)","core":"hsl(290 24% 20%)","pin":"hsl(278 88% 62%)","pin2":"hsl(313 84% 68%)","glow":"hsl(278 94% 64%)"},{"id":"ultraviolet","name":"Ultraviolet","bg1":"hsl(290 38% 8%)","bg2":"hsl(314 42% 15%)","panel":"hsl(298 29% 14%)","panel2":"hsl(304 27% 20%)","accent":"hsl(290 83% 58%)","accent2":"hsl(334 89% 62%)","text":"hsl(290 15% 96%)","muted":"hsl(290 13% 67%)","core":"hsl(302 24% 20%)","pin":"hsl(290 95% 62%)","pin2":"hsl(325 91% 68%)","glow":"hsl(290 100% 64%)"},{"id":"galaxy","name":"Galaxy","bg1":"hsl(260 38% 10%)","bg2":"hsl(284 42% 17%)","panel":"hsl(268 29% 14%)","panel2":"hsl(274 27% 20%)","accent":"hsl(260 62% 58%)","accent2":"hsl(304 68% 62%)","text":"hsl(260 15% 96%)","muted":"hsl(260 13% 67%)","core":"hsl(272 24% 20%)","pin":"hsl(260 74% 62%)","pin2":"hsl(295 70% 68%)","glow":"hsl(260 80% 64%)"},{"id":"nebula","name":"Nebula","bg1":"hsl(268 38% 6%)","bg2":"hsl(292 42% 13%)","panel":"hsl(276 29% 14%)","panel2":"hsl(282 27% 20%)","accent":"hsl(268 69% 58%)","accent2":"hsl(312 75% 62%)","text":"hsl(268 15% 96%)","muted":"hsl(268 13% 67%)","core":"hsl(280 24% 20%)","pin":"hsl(268 81% 62%)","pin2":"hsl(303 77% 68%)","glow":"hsl(268 87% 64%)"},{"id":"cosmic-dust","name":"Cosmic Dust","bg1":"hsl(248 38% 8%)","bg2":"hsl(272 42% 15%)","panel":"hsl(256 29% 14%)","panel2":"hsl(262 27% 20%)","accent":"hsl(248 76% 58%)","accent2":"hsl(292 82% 62%)","text":"hsl(248 15% 96%)","muted":"hsl(248 13% 67%)","core":"hsl(260 24% 20%)","pin":"hsl(248 88% 62%)","pin2":"hsl(283 84% 68%)","glow":"hsl(248 94% 64%)"},{"id":"moonlight","name":"Moonlight","bg1":"hsl(230 38% 10%)","bg2":"hsl(254 42% 17%)","panel":"hsl(238 29% 14%)","panel2":"hsl(244 27% 20%)","accent":"hsl(230 83% 58%)","accent2":"hsl(274 89% 62%)","text":"hsl(230 15% 96%)","muted":"hsl(230 13% 67%)","core":"hsl(242 24% 20%)","pin":"hsl(230 95% 62%)","pin2":"hsl(265 91% 68%)","glow":"hsl(230 100% 64%)"},{"id":"starlight","name":"Starlight","bg1":"hsl(215 38% 6%)","bg2":"hsl(239 42% 13%)","panel":"hsl(223 29% 14%)","panel2":"hsl(229 27% 20%)","accent":"hsl(215 62% 58%)","accent2":"hsl(259 68% 62%)","text":"hsl(215 15% 96%)","muted":"hsl(215 13% 67%)","core":"hsl(227 24% 20%)","pin":"hsl(215 74% 62%)","pin2":"hsl(250 70% 68%)","glow":"hsl(215 80% 64%)"},{"id":"blackout","name":"Blackout","bg1":"#050505","bg2":"#0d0d0f","panel":"#101013","panel2":"#19191d","accent":"#f4f4f5","accent2":"#8b8b95","text":"#ffffff","muted":"#9999a3","core":"#19191d","pin":"#ffffff","pin2":"#a1a1aa","glow":"#ffffff"},{"id":"graphite","name":"Graphite","bg1":"#101114","bg2":"#1b1e24","panel":"#20242b","panel2":"#2c313a","accent":"#aeb7c6","accent2":"#6f7b8d","text":"#f6f7f9","muted":"#9ba3af","core":"#242932","pin":"#dce2ea","pin2":"#8d98a8","glow":"#b8c2d2"},{"id":"silver-chrome","name":"Silver Chrome","bg1":"#11151b","bg2":"#252b33","panel":"#2d333c","panel2":"#3b424d","accent":"#e8edf4","accent2":"#8da0b5","text":"#ffffff","muted":"#b2bcc8","core":"#353c46","pin":"#f3f7fb","pin2":"#9ca9b7","glow":"#d9e4ef"},{"id":"whiteout","name":"Whiteout","bg1":"hsl(210 45% 93%)","bg2":"hsl(228 38% 86%)","panel":"rgba(255,255,255,.82)","panel2":"rgba(248,248,252,.92)","accent":"hsl(210 78% 52%)","accent2":"hsl(252 68% 55%)","text":"hsl(210 25% 15%)","muted":"hsl(210 15% 42%)","core":"hsl(218 28% 26%)","pin":"hsl(210 80% 54%)","pin2":"hsl(245 76% 60%)","glow":"hsl(210 90% 62%)"},{"id":"paper-light","name":"Paper Light","bg1":"hsl(205 45% 93%)","bg2":"hsl(223 38% 86%)","panel":"rgba(255,255,255,.82)","panel2":"rgba(248,248,252,.92)","accent":"hsl(205 78% 52%)","accent2":"hsl(247 68% 55%)","text":"hsl(205 25% 15%)","muted":"hsl(205 15% 42%)","core":"hsl(213 28% 26%)","pin":"hsl(205 80% 54%)","pin2":"hsl(240 76% 60%)","glow":"hsl(205 90% 62%)"},{"id":"cream-soda","name":"Cream Soda","bg1":"hsl(42 45% 93%)","bg2":"hsl(60 38% 86%)","panel":"rgba(255,255,255,.82)","panel2":"rgba(248,248,252,.92)","accent":"hsl(42 78% 52%)","accent2":"hsl(84 68% 55%)","text":"hsl(42 25% 15%)","muted":"hsl(42 15% 42%)","core":"hsl(50 28% 26%)","pin":"hsl(42 80% 54%)","pin2":"hsl(77 76% 60%)","glow":"hsl(42 90% 62%)"},{"id":"peach-glow","name":"Peach Glow","bg1":"hsl(18 45% 93%)","bg2":"hsl(36 38% 86%)","panel":"rgba(255,255,255,.82)","panel2":"rgba(248,248,252,.92)","accent":"hsl(18 78% 52%)","accent2":"hsl(60 68% 55%)","text":"hsl(18 25% 15%)","muted":"hsl(18 15% 42%)","core":"hsl(26 28% 26%)","pin":"hsl(18 80% 54%)","pin2":"hsl(53 76% 60%)","glow":"hsl(18 90% 62%)"},{"id":"coral-reef","name":"Coral Reef","bg1":"hsl(8 38% 10%)","bg2":"hsl(32 42% 17%)","panel":"hsl(16 29% 14%)","panel2":"hsl(22 27% 20%)","accent":"hsl(8 62% 58%)","accent2":"hsl(52 68% 62%)","text":"hsl(8 15% 96%)","muted":"hsl(8 13% 67%)","core":"hsl(20 24% 20%)","pin":"hsl(8 74% 62%)","pin2":"hsl(43 70% 68%)","glow":"hsl(8 80% 64%)"},{"id":"tropical-punch","name":"Tropical Punch","bg1":"hsl(342 38% 6%)","bg2":"hsl(6 42% 13%)","panel":"hsl(350 29% 14%)","panel2":"hsl(356 27% 20%)","accent":"hsl(342 69% 58%)","accent2":"hsl(26 75% 62%)","text":"hsl(342 15% 96%)","muted":"hsl(342 13% 67%)","core":"hsl(354 24% 20%)","pin":"hsl(342 81% 62%)","pin2":"hsl(17 77% 68%)","glow":"hsl(342 87% 64%)"},{"id":"watermelon","name":"Watermelon","bg1":"hsl(350 38% 8%)","bg2":"hsl(14 42% 15%)","panel":"hsl(358 29% 14%)","panel2":"hsl(4 27% 20%)","accent":"hsl(350 76% 58%)","accent2":"hsl(34 82% 62%)","text":"hsl(350 15% 96%)","muted":"hsl(350 13% 67%)","core":"hsl(2 24% 20%)","pin":"hsl(350 88% 62%)","pin2":"hsl(25 84% 68%)","glow":"hsl(350 94% 64%)"},{"id":"strawberry-milk","name":"Strawberry Milk","bg1":"hsl(335 45% 93%)","bg2":"hsl(353 38% 86%)","panel":"rgba(255,255,255,.82)","panel2":"rgba(248,248,252,.92)","accent":"hsl(335 78% 52%)","accent2":"hsl(17 68% 55%)","text":"hsl(335 25% 15%)","muted":"hsl(335 15% 42%)","core":"hsl(343 28% 26%)","pin":"hsl(335 80% 54%)","pin2":"hsl(10 76% 60%)","glow":"hsl(335 90% 62%)"},{"id":"blueberry","name":"Blueberry","bg1":"hsl(220 38% 6%)","bg2":"hsl(244 42% 13%)","panel":"hsl(228 29% 14%)","panel2":"hsl(234 27% 20%)","accent":"hsl(220 62% 58%)","accent2":"hsl(264 68% 62%)","text":"hsl(220 15% 96%)","muted":"hsl(220 13% 67%)","core":"hsl(232 24% 20%)","pin":"hsl(220 74% 62%)","pin2":"hsl(255 70% 68%)","glow":"hsl(220 80% 64%)"},{"id":"grape-soda","name":"Grape Soda","bg1":"hsl(276 38% 8%)","bg2":"hsl(300 42% 15%)","panel":"hsl(284 29% 14%)","panel2":"hsl(290 27% 20%)","accent":"hsl(276 69% 58%)","accent2":"hsl(320 75% 62%)","text":"hsl(276 15% 96%)","muted":"hsl(276 13% 67%)","core":"hsl(288 24% 20%)","pin":"hsl(276 81% 62%)","pin2":"hsl(311 77% 68%)","glow":"hsl(276 87% 64%)"},{"id":"mint-chocolate","name":"Mint Chocolate","bg1":"hsl(145 38% 10%)","bg2":"hsl(169 42% 17%)","panel":"hsl(153 29% 14%)","panel2":"hsl(159 27% 20%)","accent":"hsl(145 76% 58%)","accent2":"hsl(189 82% 62%)","text":"hsl(145 15% 96%)","muted":"hsl(145 13% 67%)","core":"hsl(157 24% 20%)","pin":"hsl(145 88% 62%)","pin2":"hsl(180 84% 68%)","glow":"hsl(145 94% 64%)"},{"id":"coffee","name":"Coffee","bg1":"hsl(28 38% 6%)","bg2":"hsl(52 42% 13%)","panel":"hsl(36 29% 14%)","panel2":"hsl(42 27% 20%)","accent":"hsl(28 83% 58%)","accent2":"hsl(72 89% 62%)","text":"hsl(28 15% 96%)","muted":"hsl(28 13% 67%)","core":"hsl(40 24% 20%)","pin":"hsl(28 95% 62%)","pin2":"hsl(63 91% 68%)","glow":"hsl(28 100% 64%)"},{"id":"mocha-neon","name":"Mocha Neon","bg1":"hsl(20 38% 8%)","bg2":"hsl(44 42% 15%)","panel":"hsl(28 29% 14%)","panel2":"hsl(34 27% 20%)","accent":"hsl(20 62% 58%)","accent2":"hsl(64 68% 62%)","text":"hsl(20 15% 96%)","muted":"hsl(20 13% 67%)","core":"hsl(32 24% 20%)","pin":"hsl(20 74% 62%)","pin2":"hsl(55 70% 68%)","glow":"hsl(20 80% 64%)"},{"id":"caramel","name":"Caramel","bg1":"hsl(35 38% 10%)","bg2":"hsl(59 42% 17%)","panel":"hsl(43 29% 14%)","panel2":"hsl(49 27% 20%)","accent":"hsl(35 69% 58%)","accent2":"hsl(79 75% 62%)","text":"hsl(35 15% 96%)","muted":"hsl(35 13% 67%)","core":"hsl(47 24% 20%)","pin":"hsl(35 81% 62%)","pin2":"hsl(70 77% 68%)","glow":"hsl(35 87% 64%)"},{"id":"honeycomb","name":"Honeycomb","bg1":"hsl(45 38% 6%)","bg2":"hsl(69 42% 13%)","panel":"hsl(53 29% 14%)","panel2":"hsl(59 27% 20%)","accent":"hsl(45 76% 58%)","accent2":"hsl(89 82% 62%)","text":"hsl(45 15% 96%)","muted":"hsl(45 13% 67%)","core":"hsl(57 24% 20%)","pin":"hsl(45 88% 62%)","pin2":"hsl(80 84% 68%)","glow":"hsl(45 94% 64%)"},{"id":"desert-sand","name":"Desert Sand","bg1":"hsl(38 38% 8%)","bg2":"hsl(62 42% 15%)","panel":"hsl(46 29% 14%)","panel2":"hsl(52 27% 20%)","accent":"hsl(38 83% 58%)","accent2":"hsl(82 89% 62%)","text":"hsl(38 15% 96%)","muted":"hsl(38 13% 67%)","core":"hsl(50 24% 20%)","pin":"hsl(38 95% 62%)","pin2":"hsl(73 91% 68%)","glow":"hsl(38 100% 64%)"},{"id":"canyon","name":"Canyon","bg1":"hsl(22 38% 10%)","bg2":"hsl(46 42% 17%)","panel":"hsl(30 29% 14%)","panel2":"hsl(36 27% 20%)","accent":"hsl(22 62% 58%)","accent2":"hsl(66 68% 62%)","text":"hsl(22 15% 96%)","muted":"hsl(22 13% 67%)","core":"hsl(34 24% 20%)","pin":"hsl(22 74% 62%)","pin2":"hsl(57 70% 68%)","glow":"hsl(22 80% 64%)"},{"id":"volcano","name":"Volcano","bg1":"hsl(8 38% 6%)","bg2":"hsl(32 42% 13%)","panel":"hsl(16 29% 14%)","panel2":"hsl(22 27% 20%)","accent":"hsl(8 69% 58%)","accent2":"hsl(52 75% 62%)","text":"hsl(8 15% 96%)","muted":"hsl(8 13% 67%)","core":"hsl(20 24% 20%)","pin":"hsl(8 81% 62%)","pin2":"hsl(43 77% 68%)","glow":"hsl(8 87% 64%)"},{"id":"inferno","name":"Inferno","bg1":"hsl(4 38% 8%)","bg2":"hsl(28 42% 15%)","panel":"hsl(12 29% 14%)","panel2":"hsl(18 27% 20%)","accent":"hsl(4 76% 58%)","accent2":"hsl(48 82% 62%)","text":"hsl(4 15% 96%)","muted":"hsl(4 13% 67%)","core":"hsl(16 24% 20%)","pin":"hsl(4 88% 62%)","pin2":"hsl(39 84% 68%)","glow":"hsl(4 94% 64%)"},{"id":"fire-ice","name":"Fire & Ice","bg1":"hsl(198 38% 10%)","bg2":"hsl(222 42% 17%)","panel":"hsl(206 29% 14%)","panel2":"hsl(212 27% 20%)","accent":"hsl(198 83% 58%)","accent2":"hsl(242 89% 62%)","text":"hsl(198 15% 96%)","muted":"hsl(198 13% 67%)","core":"hsl(210 24% 20%)","pin":"hsl(198 95% 62%)","pin2":"hsl(233 91% 68%)","glow":"hsl(198 100% 64%)"},{"id":"aurora","name":"Aurora","bg1":"hsl(165 38% 6%)","bg2":"hsl(189 42% 13%)","panel":"hsl(173 29% 14%)","panel2":"hsl(179 27% 20%)","accent":"hsl(165 62% 58%)","accent2":"hsl(209 68% 62%)","text":"hsl(165 15% 96%)","muted":"hsl(165 13% 67%)","core":"hsl(177 24% 20%)","pin":"hsl(165 74% 62%)","pin2":"hsl(200 70% 68%)","glow":"hsl(165 80% 64%)"},{"id":"northern-lights","name":"Northern Lights","bg1":"hsl(150 38% 8%)","bg2":"hsl(174 42% 15%)","panel":"hsl(158 29% 14%)","panel2":"hsl(164 27% 20%)","accent":"hsl(150 69% 58%)","accent2":"hsl(194 75% 62%)","text":"hsl(150 15% 96%)","muted":"hsl(150 13% 67%)","core":"hsl(162 24% 20%)","pin":"hsl(150 81% 62%)","pin2":"hsl(185 77% 68%)","glow":"hsl(150 87% 64%)"},{"id":"rainforest","name":"Rainforest","bg1":"hsl(135 38% 10%)","bg2":"hsl(159 42% 17%)","panel":"hsl(143 29% 14%)","panel2":"hsl(149 27% 20%)","accent":"hsl(135 76% 58%)","accent2":"hsl(179 82% 62%)","text":"hsl(135 15% 96%)","muted":"hsl(135 13% 67%)","core":"hsl(147 24% 20%)","pin":"hsl(135 88% 62%)","pin2":"hsl(170 84% 68%)","glow":"hsl(135 94% 64%)"},{"id":"deep-sea","name":"Deep Sea","bg1":"hsl(205 38% 6%)","bg2":"hsl(229 42% 13%)","panel":"hsl(213 29% 14%)","panel2":"hsl(219 27% 20%)","accent":"hsl(205 83% 58%)","accent2":"hsl(249 89% 62%)","text":"hsl(205 15% 96%)","muted":"hsl(205 13% 67%)","core":"hsl(217 24% 20%)","pin":"hsl(205 95% 62%)","pin2":"hsl(240 91% 68%)","glow":"hsl(205 100% 64%)"},{"id":"synthwave","name":"Synthwave","bg1":"hsl(305 38% 8%)","bg2":"hsl(329 42% 15%)","panel":"hsl(313 29% 14%)","panel2":"hsl(319 27% 20%)","accent":"hsl(305 62% 58%)","accent2":"hsl(349 68% 62%)","text":"hsl(305 15% 96%)","muted":"hsl(305 13% 67%)","core":"hsl(317 24% 20%)","pin":"hsl(305 74% 62%)","pin2":"hsl(340 70% 68%)","glow":"hsl(305 80% 64%)"},{"id":"retrowave","name":"Retrowave","bg1":"hsl(320 38% 10%)","bg2":"hsl(344 42% 17%)","panel":"hsl(328 29% 14%)","panel2":"hsl(334 27% 20%)","accent":"hsl(320 69% 58%)","accent2":"hsl(4 75% 62%)","text":"hsl(320 15% 96%)","muted":"hsl(320 13% 67%)","core":"hsl(332 24% 20%)","pin":"hsl(320 81% 62%)","pin2":"hsl(355 77% 68%)","glow":"hsl(320 87% 64%)"},{"id":"vaporwave","name":"Vaporwave","bg1":"hsl(288 38% 6%)","bg2":"hsl(312 42% 13%)","panel":"hsl(296 29% 14%)","panel2":"hsl(302 27% 20%)","accent":"hsl(288 76% 58%)","accent2":"hsl(332 82% 62%)","text":"hsl(288 15% 96%)","muted":"hsl(288 13% 67%)","core":"hsl(300 24% 20%)","pin":"hsl(288 88% 62%)","pin2":"hsl(323 84% 68%)","glow":"hsl(288 94% 64%)"},{"id":"y2k","name":"Y2K","bg1":"hsl(205 38% 8%)","bg2":"hsl(229 42% 15%)","panel":"hsl(213 29% 14%)","panel2":"hsl(219 27% 20%)","accent":"hsl(205 83% 58%)","accent2":"hsl(249 89% 62%)","text":"hsl(205 15% 96%)","muted":"hsl(205 13% 67%)","core":"hsl(217 24% 20%)","pin":"hsl(205 95% 62%)","pin2":"hsl(240 91% 68%)","glow":"hsl(205 100% 64%)"},{"id":"matrix-green","name":"Matrix Green","bg1":"hsl(120 38% 10%)","bg2":"hsl(144 42% 17%)","panel":"hsl(128 29% 14%)","panel2":"hsl(134 27% 20%)","accent":"hsl(120 62% 58%)","accent2":"hsl(164 68% 62%)","text":"hsl(120 15% 96%)","muted":"hsl(120 13% 67%)","core":"hsl(132 24% 20%)","pin":"hsl(120 74% 62%)","pin2":"hsl(155 70% 68%)","glow":"hsl(120 80% 64%)"},{"id":"terminal-amber","name":"Terminal Amber","bg1":"hsl(38 38% 6%)","bg2":"hsl(62 42% 13%)","panel":"hsl(46 29% 14%)","panel2":"hsl(52 27% 20%)","accent":"hsl(38 69% 58%)","accent2":"hsl(82 75% 62%)","text":"hsl(38 15% 96%)","muted":"hsl(38 13% 67%)","core":"hsl(50 24% 20%)","pin":"hsl(38 81% 62%)","pin2":"hsl(73 77% 68%)","glow":"hsl(38 87% 64%)"},{"id":"royal-gold","name":"Royal Gold","bg1":"hsl(45 38% 8%)","bg2":"hsl(69 42% 15%)","panel":"hsl(53 29% 14%)","panel2":"hsl(59 27% 20%)","accent":"hsl(45 76% 58%)","accent2":"hsl(89 82% 62%)","text":"hsl(45 15% 96%)","muted":"hsl(45 13% 67%)","core":"hsl(57 24% 20%)","pin":"hsl(45 88% 62%)","pin2":"hsl(80 84% 68%)","glow":"hsl(45 94% 64%)"},{"id":"royal-purple","name":"Royal Purple","bg1":"hsl(275 38% 10%)","bg2":"hsl(299 42% 17%)","panel":"hsl(283 29% 14%)","panel2":"hsl(289 27% 20%)","accent":"hsl(275 83% 58%)","accent2":"hsl(319 89% 62%)","text":"hsl(275 15% 96%)","muted":"hsl(275 13% 67%)","core":"hsl(287 24% 20%)","pin":"hsl(275 95% 62%)","pin2":"hsl(310 91% 68%)","glow":"hsl(275 100% 64%)"},{"id":"atlantis","name":"Atlantis","bg1":"hsl(190 38% 6%)","bg2":"hsl(214 42% 13%)","panel":"hsl(198 29% 14%)","panel2":"hsl(204 27% 20%)","accent":"hsl(190 62% 58%)","accent2":"hsl(234 68% 62%)","text":"hsl(190 15% 96%)","muted":"hsl(190 13% 67%)","core":"hsl(202 24% 20%)","pin":"hsl(190 74% 62%)","pin2":"hsl(225 70% 68%)","glow":"hsl(190 80% 64%)"},{"id":"science-lab","name":"Science Lab","bg1":"hsl(182 45% 93%)","bg2":"hsl(200 38% 86%)","panel":"rgba(255,255,255,.82)","panel2":"rgba(248,248,252,.92)","accent":"hsl(182 78% 52%)","accent2":"hsl(224 68% 55%)","text":"hsl(182 25% 15%)","muted":"hsl(182 15% 42%)","core":"hsl(190 28% 26%)","pin":"hsl(182 80% 54%)","pin2":"hsl(217 76% 60%)","glow":"hsl(182 90% 62%)"}];
+
+let CURRENT_THEME=THEMES[0];
+const THEME_LAST='coreball500_last_theme_v1';
+function themeById(id){return THEMES.find(t=>t.id===id)||THEMES[0]}
+function setCssTheme(t){
+ const r=document.documentElement.style;
+ const map={bg1:'--t-bg1',bg2:'--t-bg2',panel:'--t-panel',panel2:'--t-panel2',accent:'--t-accent',accent2:'--t-accent2',text:'--t-text',muted:'--t-muted',core:'--t-core',pin:'--t-pin',pin2:'--t-pin2',glow:'--t-glow'};
+ Object.entries(map).forEach(([k,v])=>r.setProperty(v,t[k]));
+}
+function applyTheme(id,{save=true,toastIt=false}={}){
+ CURRENT_THEME=themeById(id);setCssTheme(CURRENT_THEME);localStorage.setItem(THEME_LAST,CURRENT_THEME.id);
+ if(save&&CURRENT_USER){const a=accounts(),u=a[CURRENT_USER];if(u){u.progress=u.progress||{};u.progress.theme=CURRENT_THEME.id;a[CURRENT_USER]=u;writeAccounts(a)}}
+ renderThemeGrid($('themeSearch')?.value||'');
+ if(toastIt)toast(CURRENT_THEME.name.toUpperCase());
+}
+function openThemes(){renderThemeGrid('');$('themeSearch').value='';$('themeOverlay').classList.add('open');setTimeout(()=>$('themeSearch').focus(),40)}
+function closeThemes(){$('themeOverlay').classList.remove('open')}
+function renderThemeGrid(query=''){
+ const box=$('themeGrid');if(!box)return;const q=query.trim().toLowerCase();box.innerHTML='';
+ const shown=THEMES.filter(t=>!q||t.name.toLowerCase().includes(q));
+ shown.forEach(t=>{const b=document.createElement('button');b.type='button';b.className='themeCard'+(t.id===CURRENT_THEME.id?' active':'');b.dataset.theme=t.id;
+   b.innerHTML=`<i class="themeSwatch" style="background:linear-gradient(135deg,${t.bg1},${t.accent} 52%,${t.accent2})"></i><span><b>${t.name}</b><small>${t.id===CURRENT_THEME.id?'ACTIVE':'APPLY THEME'}</small></span>`;
+   b.addEventListener('click',()=>applyTheme(t.id,{save:true,toastIt:true}));box.appendChild(b)});
+ $('themeCount').textContent=shown.length+' / 74';
+}
+function tc(k){return CURRENT_THEME[k]}
+
+
+function accounts(){
+ try{return JSON.parse(localStorage.getItem(AUTH_ACCOUNTS)||'{}')}catch{return {}}
+}
+function writeAccounts(v){localStorage.setItem(AUTH_ACCOUNTS,JSON.stringify(v))}
+async function hashText(text){
+ const data=new TextEncoder().encode(text);
+ const buf=await crypto.subtle.digest('SHA-256',data);
+ return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+function playerDefaults(name,email){
+ return {
+   name,email,createdAt:new Date().toISOString(),
+   progress:{level:1,bestLevel:1,maxLives:3,lives:3,slowCharges:3,scienceCorrect:0,scienceAnswered:0,shotsFired:0,levelsCleared:0,theme:localStorage.getItem(THEME_LAST)||'classic-pink'}
+ };
+}
+function setAuthMode(mode){
+ const login=mode==='login';
+ $('loginTab').classList.toggle('active',login);
+ $('signupTab').classList.toggle('active',!login);
+ $('loginForm').classList.toggle('hidden',!login);
+ $('signupForm').classList.toggle('hidden',login);
+ $('authError').textContent='';
+}
+function authError(msg){$('authError').textContent=msg}
+function progress(){
+ if(!CURRENT_USER)return null;
+ const a=accounts();return a[CURRENT_USER]?.progress||null;
+}
+function saveProgress(){
+ if(!CURRENT_USER)return;
+ const a=accounts(),u=a[CURRENT_USER];
+ if(!u)return;
+ const old=u.progress||{};
+ u.progress={
+   ...old,
+   level:G.level,
+   bestLevel:Math.max(old.bestLevel||1,G.level),
+   maxLives:G.maxLives,
+   lives:G.lives,
+   slowCharges:G.slowCharges
+ };
+ a[CURRENT_USER]=u;writeAccounts(a);
+ updateProfile();
+}
+function addStat(key,amount=1){
+ if(!CURRENT_USER)return;
+ const a=accounts(),u=a[CURRENT_USER];if(!u)return;
+ u.progress=u.progress||{};
+ u.progress[key]=(u.progress[key]||0)+amount;
+ a[CURRENT_USER]=u;writeAccounts(a);updateProfile();
+}
+function updateProfile(){
+ if(!CURRENT_USER)return;
+ const u=accounts()[CURRENT_USER];if(!u)return;
+ const pr=u.progress||{};
+ $('playerName').textContent=u.name||'PLAYER';
+ $('profileAvatar').textContent=(u.name||'P').trim().slice(0,1).toUpperCase();
+ $('bestLevel').textContent=pr.bestLevel||1;
+ $('scienceScore').textContent=pr.scienceCorrect||0;
+ $('levelProgressFill').style.width=Math.max(.2,Math.min(100,(G.level/500)*100))+'%';
+}
+function enterUser(email){
+ const a=accounts(),u=a[email];if(!u)return false;
+ CURRENT_USER=email;
+ localStorage.setItem(AUTH_SESSION,email);
+ const pr=u.progress||{};
+ G.level=Math.min(500,Math.max(1,pr.level||1));
+ G.maxLives=[3,5,7].includes(pr.maxLives)?pr.maxLives:3;
+ G.lives=Math.max(1,Math.min(G.maxLives,pr.lives||G.maxLives));
+ G.slowCharges=Math.max(0,Math.min(5,pr.slowCharges ?? 3));
+ applyTheme(pr.theme||localStorage.getItem(THEME_LAST)||'classic-pink',{save:false});
+ $('authOverlay').classList.remove('open');
+ G.paused=false;saveProgress();
+ loadLevel();
+ updateProfile();
+ toast('WELCOME '+(u.name||'PLAYER').toUpperCase());
+ return true;
+}
+function logout(){
+ saveProgress();
+ localStorage.removeItem(AUTH_SESSION);
+ CURRENT_USER=null;
+ G.paused=true;
+ $('authOverlay').classList.add('open');
+ setAuthMode('login');
+}
+async function bootAuth(){
+ applyTheme(localStorage.getItem(THEME_LAST)||'classic-pink',{save:false});
+ loadLevel();
+ const session=localStorage.getItem(AUTH_SESSION);
+ if(session && accounts()[session])enterUser(session);
+ else {G.paused=true;$('authOverlay').classList.add('open')}
+}
+function showLevelSplash(title='LEVEL CLEAR',sub='NEXT LEVEL'){
+ const e=$('levelSplash');e.querySelector('b').textContent=title;e.querySelector('span').textContent=sub;
+ e.classList.remove('show');void e.offsetWidth;e.classList.add('show');
+}
+function burst(x,y,color=null,count=14){
+ color=color||tc('pin');
+ const now=performance.now();
+ for(let i=0;i<count;i++){
+   const a=Math.random()*TAU,sp=35+Math.random()*95;
+   FX.push({x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-20,born:now,life:420+Math.random()*360,r:1.8+Math.random()*3,color});
+ }
+}
+function drawFX(now){
+ for(let i=FX.length-1;i>=0;i--){
+   const p=FX[i],age=now-p.born,t=age/p.life;
+   if(t>=1){FX.splice(i,1);continue}
+   const sec=age/1000,x=p.x+p.vx*sec,y=p.y+p.vy*sec+70*sec*sec;
+   ctx.save();ctx.globalAlpha=(1-t)*(1-t);ctx.shadowColor=p.color;ctx.shadowBlur=10;
+   circle(x,y,p.r*(1-t*.35),p.color);ctx.restore();
+ }
+}
+
+
 function spec(){return LEVELS[G.level-1]}
 function norm(a){return ((a%TAU)+TAU)%TAU}
 function corePos(rel){const a=rel+G.angle;return{x:CX+Math.cos(a)*CORE_R,y:CY+Math.sin(a)*CORE_R}}
@@ -164,6 +567,8 @@ function updateHud(){
  $('slow').disabled=G.paused||G.quizOpen||G.completed||!!G.impact||G.slowCharges<1;
  $('deep').disabled=G.paused||G.quizOpen||G.completed||!!G.impact||G.slowCharges<2;
  $('pause').textContent=G.paused?'▶':'Ⅱ';
+ $('levelProgressFill').style.width=Math.max(.2,Math.min(100,(G.level/500)*100))+'%';
+ if(CURRENT_USER)updateProfile();
 }
 
 function toast(text){
@@ -175,7 +580,7 @@ function toast(text){
 function startShot(){
  if(G.paused||G.quizOpen||G.completed||G.flight||G.impact||!G.queue.length)return false;
  G.flight={elapsed:0,duration:spec().flight_ms,number:G.queue[G.queue.length-1],y:QUEUE_Y};
- updateHud();return true;
+ addStat('shotsFired',1);saveProgress();updateHud();return true;
 }
 
 function sweptHit(y0,y1){
@@ -198,7 +603,8 @@ function beginImpact(hit){
  G.flight=null;
  G.lives=Math.max(0,G.lives-1);
  G.collisions++;
- G.impact={elapsed:0,duration:90,x:CX,y:hit.y,n,contactX:hit.p.x,contactY:hit.p.y};
+ G.impact={elapsed:0,duration:105,x:CX,y:hit.y,n,contactX:hit.p.x,contactY:hit.p.y};
+ burst(hit.p.x,hit.p.y,tc('accent'),18);$('stage').classList.remove('hitShake');void $('stage').offsetWidth;$('stage').classList.add('hitShake');saveProgress();
  toast('HIT');
  $('status').textContent='Heart lost — answer science to win it back.';
  updateHud();
@@ -226,22 +632,22 @@ function landShot(){
  G.attached.push(rel);
  G.queue.pop();
  G.flight=null;
- toast('✓');
+ burst(CX,IMPACT_Y,tc('pin'),12);toast('✓');
 
  if(!G.queue.length){
    const done=G.level;
    if(done>=500){
      G.completed=true;
      $('status').textContent='All 500 levels complete!';
-     toast('500 COMPLETE');
+     addStat('levelsCleared',1);saveProgress();showLevelSplash('500 COMPLETE','SCIENCE MASTER');burst(CX,CY,'#ffd36c',55);toast('500 COMPLETE');
      updateHud();
      return;
    }
    if(done%5===0)G.slowCharges=Math.min(5,G.slowCharges+1);
    if(done%10===0)G.lives=Math.min(G.maxLives,G.lives+1);
-   G.level++;
+   addStat('levelsCleared',1);G.level++;saveProgress();showLevelSplash('LEVEL '+done+' CLEAR','LEVEL '+G.level+' UNLOCKED');burst(CX,CY,tc('accent2'),32);
    loadLevel();
-   $('status').textContent='Level '+G.level+'.';
+   $('status').textContent='Level '+G.level+' unlocked.';
  }else{
    $('status').textContent=G.queue.length+' balls left.';
    updateHud();
@@ -275,14 +681,14 @@ function answerScience(i,btn){
    if(j===G.quiz.c)b.classList.add('correct');
  });
  if(i===G.quiz.c){
-   G.lives=Math.min(G.maxLives,G.lives+1);
+   G.lives=Math.min(G.maxLives,G.lives+1);addStat('scienceCorrect',1);
    $('result').textContent='Correct! Your lost heart is restored.';
    toast('+1 HEART');
  }else{
    btn.classList.add('wrong');
    $('result').textContent='Incorrect. Correct answer: '+G.quiz.a[G.quiz.c]+'.';
  }
- $('continueBtn').classList.add('show');
+ addStat('scienceAnswered',1);saveProgress();$('continueBtn').classList.add('show');
  updateHud();
 }
 
@@ -304,7 +710,7 @@ function useSlow(factor,cost,label){
  G.slowCharges-=cost;
  G.slowFactor=factor;
  G.slowUntil=performance.now()+3600;
- toast(label);updateHud();
+ toast(label);saveProgress();updateHud();
 }
 
 function togglePause(){
@@ -319,7 +725,7 @@ function retry(){
 function cycleLives(){
  if(G.quizOpen||G.impact)return;
  G.maxLives=G.maxLives===3?5:G.maxLives===5?7:3;
- G.lives=G.maxLives;toast(G.maxLives+' HEARTS');updateHud();
+ G.lives=G.maxLives;toast(G.maxLives+' HEARTS');saveProgress();updateHud();
 }
 
 function circle(x,y,r,fill){
@@ -327,15 +733,24 @@ function circle(x,y,r,fill){
 }
 function drawPin(rel){
  const a=corePos(rel),b=ballPos(rel);
- ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);
- ctx.strokeStyle='#ff7db8';ctx.lineWidth=1.7;ctx.stroke();
- circle(b.x,b.y,BALL_R,'#ff5da9');
+ ctx.save();
+ ctx.shadowColor='rgba(255,76,159,.38)';ctx.shadowBlur=7;
+ const lg=ctx.createLinearGradient(a.x,a.y,b.x,b.y);lg.addColorStop(0,tc('accent2'));lg.addColorStop(1,tc('pin2'));
+ ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle=lg;ctx.lineWidth=1.9;ctx.stroke();
+ const g=ctx.createRadialGradient(b.x-4,b.y-5,1,b.x,b.y,BALL_R);g.addColorStop(0,tc('text'));g.addColorStop(.35,tc('pin2'));g.addColorStop(1,tc('pin'));
+ circle(b.x,b.y,BALL_R,g);ctx.restore();
 }
 function drawCore(){
  ctx.save();
- ctx.shadowColor='rgba(0,0,0,.25)';ctx.shadowBlur=10;ctx.shadowOffsetY=4;
- circle(CX,CY,CORE_R,'#242636');ctx.restore();
- ctx.fillStyle='#d9d6e5';ctx.font='700 13px Arial';ctx.textAlign='center';ctx.textBaseline='middle';
+ const pulse=1+Math.sin(performance.now()/360)*.025;
+ ctx.translate(CX,CY);ctx.scale(pulse,pulse);ctx.translate(-CX,-CY);
+ ctx.shadowColor=tc('glow');ctx.shadowBlur=24;
+ const g=ctx.createRadialGradient(CX-14,CY-16,5,CX,CY,CORE_R);
+ g.addColorStop(0,tc('panel2'));g.addColorStop(.55,tc('core'));g.addColorStop(1,tc('bg1'));
+ circle(CX,CY,CORE_R,g);
+ ctx.shadowBlur=0;ctx.strokeStyle=tc('pin2');ctx.lineWidth=1.3;ctx.beginPath();ctx.arc(CX,CY,CORE_R+5,0,TAU);ctx.stroke();
+ ctx.restore();
+ ctx.fillStyle=tc('text');ctx.font='900 14px Arial';ctx.textAlign='center';ctx.textBaseline='middle';
  ctx.fillText(String(G.level),CX,CY);
 }
 function drawQueue(){
@@ -343,7 +758,7 @@ function drawQueue(){
  for(let i=0;i<max;i++){
    if((G.flight||G.impact)&&i===0)continue;
    const num=G.queue[n-1-i],y=QUEUE_Y+i*gap;
-   circle(CX,y,11,'#ff5da9');
+   circle(CX,y,11,tc('pin'));
    ctx.fillStyle='#fff';ctx.font='700 9px Arial';ctx.textAlign='center';ctx.textBaseline='middle';
    ctx.fillText(String(num),CX,y+.5);
  }
@@ -352,8 +767,8 @@ function drawFlight(){
  if(!G.flight)return;
  const y=G.flight.y;
  ctx.beginPath();ctx.moveTo(CX,y+22);ctx.lineTo(CX,y+BALL_R-1);
- ctx.strokeStyle='#ff7db8';ctx.lineWidth=1.7;ctx.stroke();
- circle(CX,y,BALL_R,'#ff5da9');
+ ctx.strokeStyle=tc('pin2');ctx.lineWidth=1.7;ctx.stroke();
+ circle(CX,y,BALL_R,tc('pin'));
  ctx.fillStyle='#fff';ctx.font='700 9px Arial';ctx.textAlign='center';ctx.textBaseline='middle';
  ctx.fillText(String(G.flight.number),CX,y+.5);
 }
@@ -362,14 +777,15 @@ function drawImpact(){
  const i=G.impact,t=Math.min(1,i.elapsed/i.duration);
  ctx.save();
  ctx.globalAlpha=1-t*.5;
- circle(CX,i.y,BALL_R,'#ff5da9');
+ circle(CX,i.y,BALL_R,tc('pin'));
  ctx.restore();
 }
 function draw(now){
  ctx.clearRect(0,0,W,H);
- ctx.fillStyle='#1f1d2d';ctx.fillRect(0,0,W,H);
+ const bg=ctx.createRadialGradient(CX,CY,20,CX,CY,360);bg.addColorStop(0,tc('panel2'));bg.addColorStop(.52,tc('bg2'));bg.addColorStop(1,tc('bg1'));ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+ ctx.save();ctx.globalAlpha=.18;ctx.strokeStyle=tc('accent2');ctx.lineWidth=1;ctx.beginPath();ctx.arc(CX,CY,ORBIT+34+Math.sin(now/700)*3,0,TAU);ctx.stroke();ctx.restore();
  G.attached.forEach(drawPin);
- drawCore();drawQueue();drawFlight();drawImpact();
+ drawCore();drawQueue();drawFlight();drawImpact();drawFX(now);
 
  if(now<G.slowUntil){
    ctx.fillStyle='#9fb9c8';ctx.font='700 9px Arial';ctx.textAlign='center';
@@ -444,6 +860,34 @@ $('retry').addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagati
 $('lifeBtn').addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();cycleLives()},{passive:false});
 $('continueBtn').addEventListener('pointerdown',e=>{e.preventDefault();closeScience()},{passive:false});
 
+$('loginTab').addEventListener('click',()=>setAuthMode('login'));
+$('signupTab').addEventListener('click',()=>setAuthMode('signup'));
+$('logoutBtn').addEventListener('click',logout);
+$('themeBtn').addEventListener('click',openThemes);
+$('themeClose').addEventListener('click',closeThemes);
+$('themeSearch').addEventListener('input',e=>renderThemeGrid(e.target.value));
+$('themeOverlay').addEventListener('pointerdown',e=>{if(e.target===$('themeOverlay'))closeThemes()});
+
+$('signupForm').addEventListener('submit',async e=>{
+ e.preventDefault();authError('');
+ const name=$('signupName').value.trim(),email=$('signupEmail').value.trim().toLowerCase(),pw=$('signupPassword').value;
+ if(name.length<2)return authError('Enter a player name with at least 2 characters.');
+ if(!email.includes('@'))return authError('Enter a valid email address.');
+ if(pw.length<6)return authError('Password must be at least 6 characters.');
+ const a=accounts();if(a[email])return authError('An account with that email already exists.');
+ const u=playerDefaults(name,email);u.passHash=await hashText(pw);a[email]=u;writeAccounts(a);
+ enterUser(email);
+});
+
+$('loginForm').addEventListener('submit',async e=>{
+ e.preventDefault();authError('');
+ const email=$('loginEmail').value.trim().toLowerCase(),pw=$('loginPassword').value;
+ const a=accounts(),u=a[email];if(!u)return authError('Account not found. Create one first.');
+ const h=await hashText(pw);if(h!==u.passHash)return authError('Incorrect password.');
+ enterUser(email);
+});
+
+
 window.addEventListener('keydown',e=>{
  if(e.repeat||G.quizOpen)return;
  if(e.code==='Space'||e.key==='Enter'){e.preventDefault();startShot()}
@@ -451,11 +895,12 @@ window.addEventListener('keydown',e=>{
  else if(e.key.toLowerCase()==='f')useSlow(.25,2,'SLOW 25%');
  else if(e.key.toLowerCase()==='p')togglePause();
  else if(e.key.toLowerCase()==='r')retry();
+ else if(e.key.toLowerCase()==='t')openThemes();
 });
 
 // Test helpers used for browser validation.
 window.__TEST__={
- state:G,spec,startShot,update,draw,
+ state:G,spec,startShot,update,draw,enterUser,accounts,applyTheme,THEMES,
  safeShot(){
    if(G.flight||G.impact||G.quizOpen||!G.queue.length)return false;
    const arr=G.attached.slice().sort((a,b)=>a-b);
@@ -485,7 +930,7 @@ window.__TEST__={
  closeScience
 };
 
-loadLevel();
+bootAuth();
 requestAnimationFrame(loop);
 })();
 </script>
