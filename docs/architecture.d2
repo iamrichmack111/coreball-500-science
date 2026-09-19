@@ -1,0 +1,41 @@
+direction: right
+
+player: Player {
+  shape: person
+}
+
+game: Coreball 500 {
+  canvas: HTML5 Canvas
+  levels: 500 Levels
+  collision: Pin Collision Engine
+  lives: Heart System
+  slow: Slow Motion
+  science: Science Bonus Life
+}
+
+testing: Playwright {
+  smoke: Smoke Tests
+  screenshots: Screenshots
+  video: Demo Video
+}
+
+github: GitHub {
+  actions: CI/CD
+  pages: GitHub Pages
+  wiki: Wiki
+  release: Releases
+}
+
+player -> game.canvas: Fire pin
+game.canvas -> game.collision
+game.collision -> game.lives: Collision
+game.lives -> game.science: Lose heart
+game.science -> game.lives: Correct answer +1 heart
+game.levels -> game.canvas
+game.slow -> game.canvas
+
+testing -> game: Browser automation
+github.actions -> testing
+github.actions -> github.pages
+github.wiki -> game
+github.release -> game
