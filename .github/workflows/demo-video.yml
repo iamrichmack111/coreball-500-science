@@ -1,0 +1,51 @@
+name: Demo Video
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Start site
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/coreball-http.log 2>&1 &
+          sleep 2
+
+      - name: Record Playwright demo
+        run: npm run demo
+
+      - name: Convert WebM to MP4
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          ffmpeg -y -i media/coreball-demo.webm \
+            -c:v libx264 -preset medium -crf 21 -pix_fmt yuv420p \
+            -movflags +faststart media/coreball-demo.mp4
+
+      - name: Upload demo media
+        uses: actions/upload-artifact@v4
+        with:
+          name: coreball-demo-video
+          path: |
+            media/coreball-demo.mp4
+            media/coreball-demo.webm
+            media/demo-cover.png

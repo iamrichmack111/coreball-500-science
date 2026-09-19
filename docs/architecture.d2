@@ -1,0 +1,42 @@
+direction: right
+
+player: Player {
+  shape: person
+}
+
+game: Coreball 500 Science {
+  canvas: HTML5 Canvas
+  levels: 500 Levels
+  physics: Collision Engine
+  lives: Hearts
+  slow: Slow Motion
+  science: Science Bonus Life
+}
+
+automation: Automation {
+  playwright: Playwright Tests
+  video: Demo Video
+  docker: Docker Build
+}
+
+github: GitHub {
+  actions: CI/CD
+  pages: Pages
+  wiki: Wiki
+  release: Releases + Tags
+}
+
+player -> game.canvas: Fire pin
+game.canvas -> game.physics
+game.physics -> game.lives: collision
+game.lives -> game.science: lost heart
+game.science -> game.lives: correct = +1 heart
+game.levels -> game.canvas
+game.slow -> game.canvas
+automation.playwright -> game
+automation.video -> game
+automation.docker -> game
+github.actions -> automation
+github.actions -> github.pages
+github.release -> game
+github.wiki -> game

@@ -1,0 +1,13 @@
+{
+  "name": "coreball-500-v15-og-science",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "playwright test",
+    "screenshots": "playwright test tests/screenshots.spec.js",
+    "demo": "node scripts/demo.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0"
+  }
+}

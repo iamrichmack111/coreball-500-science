@@ -1,0 +1,8 @@
+.git
+.github
+node_modules
+playwright-report
+test-results
+*.zip
+SETUP_GITHUB.sh
+wiki

@@ -1,0 +1,43 @@
+name: Docker
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: false
+          load: true
+          tags: coreball-500-science:test
+
+      - name: Smoke-test container
+        run: |
+          docker run -d --rm --name coreball-test -p 8088:80 coreball-500-science:test
+          for i in $(seq 1 20); do
+            if curl -fsS http://127.0.0.1:8088/ >/dev/null; then
+              docker stop coreball-test
+              exit 0
+            fi
+            sleep 1
+          done
+          docker logs coreball-test || true
+          docker stop coreball-test || true
+          exit 1
